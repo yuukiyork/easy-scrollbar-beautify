@@ -2,7 +2,7 @@
 // @name 简单滚动条美化
 // @description 简单滚动条美化，可自定义设置滚动条宽度、颜色
 // @match *://*/*
-// @version 0.4
+// @version 0.5
 // @namespace 犹科
 // @grant GM_setValue
 // @grant GM_getValue
@@ -32,7 +32,7 @@
     }
 
     let option = buildOption();
-    let styleId = "style#easy-scrollbar-beautify";
+    let styleId = "easy-scrollbar-beautify";
     let settingId = "easy-scrollbar-beautify-setting";
     let settingHtml = `
     <html>
@@ -366,21 +366,11 @@
         }
         </style>`;
     };
-    function addCss(head) {
-        let myScrollbarStyle = head.querySelector(styleId);
-        if (!myScrollbarStyle) {
-             head.insertAdjacentHTML("beforeend", buildStyle())
-        }
-    };
     try {
-        if(document.head){
-          addCss(document.head);
-        } else {
-          document.documentElement.insertAdjacentHTML("afterBegin", buildStyle())
-        }
+        document.documentElement.insertAdjacentHTML("afterBegin", buildStyle())
     } catch (err) {
         document.addEventListener ("DOMContentLoaded", function(){
-          addCss(document.head);
+          document.documentElement.insertAdjacentHTML("afterBegin", buildStyle())
         });
         return false
     }
